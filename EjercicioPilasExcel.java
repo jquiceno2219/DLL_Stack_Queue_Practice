@@ -13,8 +13,7 @@ class HojaCalculo {
         indiceActual = -1; // No hay operaciones inicialmente
     }
 
-    public void ingresarOperacion(String[][] operacion) {
-        // Eliminar las operaciones que están adelante en el historial
+    public void ingresarOperacion(String[][] operacion) {//ingresa una hoja de calculo y reemplaza la anterior
         while (indiceActual < operaciones.size() - 1) {
             operaciones.remove(operaciones.size() - 1);
         }
@@ -23,7 +22,7 @@ class HojaCalculo {
         System.out.println("Operación ingresada.");
     }
 
-    public void deshacer() {
+    public void deshacer() {//deshace la hoja de calculo ingresada
         if (indiceActual >= 0) {
             indiceActual--;
             System.out.println("Operación deshecha.");
@@ -32,7 +31,7 @@ class HojaCalculo {
         }
     }
 
-    public void rehacer() {
+    public void rehacer() {//rehace la hoja de calculo eliminada
         if (indiceActual < operaciones.size() - 1) {
             indiceActual++;
             System.out.println("Operación rehecha.");
@@ -41,7 +40,7 @@ class HojaCalculo {
         }
     }
 
-    public void imprimirHojaActual() {
+    public void imprimirHojaActual() {//imprime la hoja de calculo actual
         if (indiceActual >= 0 && indiceActual < operaciones.size()) {
             String[][] hoja = operaciones.get(indiceActual);
             System.out.println("Hoja de cálculo actual:");
@@ -52,7 +51,7 @@ class HojaCalculo {
                 System.out.println();
             }
         } else {
-            System.out.println("No hay hoja de cálculo disponible.");
+            System.out.println("No hay hoja de cálculo disponible.");//condicional para indicar que no hay hoja de calculo
         }
     }
 }
@@ -62,7 +61,7 @@ public class EjercicioPilasExcel {
         HojaCalculo hoja = new HojaCalculo();
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        while (true) {//menu principal
             System.out.println("\nSeleccione una opción:");
             System.out.println("1. Ingresar operación (nueva hoja de cálculo)");
             System.out.println("2. Deshacer");
@@ -71,35 +70,35 @@ public class EjercicioPilasExcel {
             System.out.println("5. Salir");
 
             int opcion = scanner.nextInt();
-            scanner.nextLine();  // Consumir el salto de línea después de nextInt()
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese las dimensiones de la hoja de cálculo (filas columnas): ");
+                    System.out.print("Ingrese las dimensiones de la hoja de cálculo (filas columnas): ");//se indica el ingreso del tamaño de la hoja de calculo
                     int filas = scanner.nextInt();
                     int columnas = scanner.nextInt();
                     scanner.nextLine();  // Consumir el salto de línea después de nextInt()
 
                     String[][] hojaNueva = new String[filas][columnas];
-                    System.out.println("Ingrese los datos de la hoja de cálculo:");
+                    System.out.println("Ingrese los datos de la hoja de cálculo:");//se ingresa los datos en la hoja de calculo
                     for (int i = 0; i < filas; i++) {
                         for (int j = 0; j < columnas; j++) {
                             hojaNueva[i][j] = scanner.next();
                         }
                     }
-                    hoja.ingresarOperacion(hojaNueva);
+                    hoja.ingresarOperacion(hojaNueva);//añade/reemplaza la hoja de calculo
                     break;
                 case 2:
-                    hoja.deshacer();
+                    hoja.deshacer();//deshace la hoja de calculo
                     break;
                 case 3:
-                    hoja.rehacer();
+                    hoja.rehacer();//rehace la hoja de calculo eliminada/reemplazada
                     break;
                 case 4:
-                    hoja.imprimirHojaActual();
+                    hoja.imprimirHojaActual();//imprime la hoja de calculo en estilo de una matriz
                     break;
                 case 5:
-                    System.out.println("Saliendo del programa...");
+                    System.out.println("Saliendo del programa...");//cierre de programa
                     System.exit(0);
                     break;
                 default:

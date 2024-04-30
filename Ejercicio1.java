@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class EditorTexto {
+class EditorTexto { //clase en donde se encuentran los metodos de las operaciones a realizar con los textos
     private List<String> operaciones;
     private List<String> deshacer;
     private List<String> rehacer;
@@ -15,37 +15,37 @@ class EditorTexto {
         rehacer = new ArrayList<>();
     }
 
-    public void ingresarOperacion(String operacion) {
-        operaciones.add(operacion);
+    public void ingresarOperacion(String operacion) {//se añade un texto a la lista de textos
+        operaciones.add(operacion);//añade los textos a la lista
         System.out.println("Texto ingresado: " + operacion);
     }
 
-    public void guardar() {
-        operaciones.clear();
+    public void guardar() {//se guardan los cambios, osea, se pierde la pila y ya no se puede deshacer o rehacer
+        operaciones.clear();//elimina los datos de la lista
         System.out.println("Textos guardados.");
     }
 
-    public void deshacer() {
+    public void deshacer() {//con los textos presentes en la lista, se deshace segun el orden en la pila
         if (!operaciones.isEmpty()) {
             String operacion = operaciones.remove(operaciones.size() - 1);
             deshacer.add(operacion);
             System.out.println("Texto deshecho: " + operacion);
-        } else {
+        } else {//si no hay nada en la lista
             System.out.println("No hay textos para deshacer.");
         }
     }
 
-    public void rehacer() {
+    public void rehacer() {//con los textos presentes en la lista, se rehace segun el orden en la pila
         if (!deshacer.isEmpty()) {
             String operacion = deshacer.remove(deshacer.size() - 1);
             operaciones.add(operacion);
             System.out.println("Texto rehecho: " + operacion);
-        } else {
+        } else {//si no hay nada en la lista
             System.out.println("No hay texto para rehacer.");
         }
     }
 
-    public void imprimirOperaciones() {
+    public void imprimirOperaciones() {//muestra la lista de textos
         System.out.println("Textos establecidps:");
         for (int i = 0; i < operaciones.size(); i++) {
             System.out.println((i + 1) + ". " + operaciones.get(i));
@@ -58,7 +58,7 @@ public class Ejercicio1 {
         EditorTexto editor = new EditorTexto();
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+        while (true) {//menu principal
             System.out.println("\nSeleccione una opción:");
             System.out.println("1. Ingresar texto");
             System.out.println("2. Guardar");
@@ -72,24 +72,24 @@ public class Ejercicio1 {
 
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese el texto: ");
+                    System.out.print("Ingrese el texto: ");//se ingresa el texto a colocar en la lista
                     String operacion = scanner.nextLine();
                     editor.ingresarOperacion(operacion);
                     break;
                 case 2:
-                    editor.guardar();
+                    editor.guardar();//llama el metodo de guardado/elimina la lista
                     break;
                 case 3:
-                    editor.deshacer();
+                    editor.deshacer();//llama el metodo de deshacer
                     break;
                 case 4:
-                    editor.rehacer();
+                    editor.rehacer();//llama el metodo de rehacer
                     break;
                 case 5:
-                    editor.imprimirOperaciones();
+                    editor.imprimirOperaciones();//llama la lista de textos
                     break;
                 case 6:
-                    System.out.println("Saliendo del programa...");
+                    System.out.println("Saliendo del programa...");//cierre del programa
                     System.exit(0);
                     break;
                 default:
